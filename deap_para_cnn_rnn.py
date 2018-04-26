@@ -59,7 +59,7 @@ label_suffix	=".mat_win_128_labels.pkl"
 data_file	=sys.argv[1]
 arousal_or_valence = sys.argv[2]
 
-dataset_dir = "/home/yyl/deap_shuffled_data/"+arousal_or_valence+"/"
+dataset_dir = "/home/yyl/deap_shuffled_data/origin_"+arousal_or_valence+"/"
 ###load training set
 with open(dataset_dir + data_file + cnn_suffix, "rb") as fp:
     cnn_datasets = pickle.load(fp)
@@ -463,7 +463,7 @@ with tf.Session(config=config) as session:
                         "train_sample": train_sample, "test_sample": test_sample,"batch_size":batch_size}, index=[0])
     summary = pd.DataFrame({'recall': test_recall, 'precision': test_precision,'f1_score': test_f1})
     writer = pd.ExcelWriter(
-        "./results/"+arousal_or_valence+"/"+ data_file + ".xlsx")
+        "./results/origin_"+arousal_or_valence+"/"+ data_file + ".xlsx")
     ins.to_excel(writer, 'condition', index=False)
     result.to_excel(writer, 'result', index=False)
     summary.to_excel(writer, 'summary', index=False)
